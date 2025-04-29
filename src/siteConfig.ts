@@ -12,7 +12,7 @@ export interface LinkType {
 export const name = "Miguel Pimentel";
 export const email = "miguel.pimentel@email.com";
 export const subtitle = "A collection of useful links";
-export const footer = "Made in Minnesota © 2025 Miguel Pimentel";
+export const footer = "Made with ❤️ in Minnesota";
 
 export const cards: CardType[] = [
   {
