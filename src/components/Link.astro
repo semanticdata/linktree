@@ -1,0 +1,32 @@
+---
+interface Props {
+  link: string;
+  icon: string;
+}
+const { link, icon } = Astro.props;
+
+// Helper to determine if the link is an email address
+function isEmail(str: string) {
+  return (
+    str.includes("@") && !str.startsWith("http") && !str.startsWith("mailto:")
+  );
+}
+
+let href = "";
+if (link.startsWith("mailto:")) {
+  href = link;
+} else if (isEmail(link)) {
+  href = `mailto:${link}`;
+} else if (link.startsWith("http://") || link.startsWith("https://")) {
+  href = link;
+} else {
+  href = `https://${link}`;
+}
+---
+
+<a
+  class="link-component"
+  aria-label="Social Media Link"
+  target={href.startsWith("mailto:") ? undefined : "_blank"}
+  href={href}><i class={icon} aria-hidden="true"></i></a
+>

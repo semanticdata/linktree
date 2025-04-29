@@ -1,0 +1,15 @@
+---
+interface Props {
+  name: string;
+  link: string;
+  icon: string;
+}
+const { name, link, icon } = Astro.props;
+---
+
+<a href={link} target="_blank" aria-label={name} class="card-component">
+  <div class="card-container">
+    <i class={`${icon} card-icon`} aria-hidden="true"></i>
+    <span class="card-title">{name}</span>
+  </div>
+</a>
