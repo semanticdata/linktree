@@ -93,9 +93,10 @@ main {
   padding: 1rem;
   border-radius: var(--card-border-radius); /* Use variable */
   border: var(--card-border-width) solid var(--card-border-color); /* Updated border color */
-  transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Adjusted transition */
+  transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add box-shadow to transition */
   display: block;
   text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Add subtle shadow */
 }
 
 .card-component:active {
@@ -103,7 +104,9 @@ main {
 }
 
 .card-component:hover {
-  border-color: var(--card-hover-border-color);
+  /* filter: brightness(2); Replaced with border color change */
+  border-color: var(--card-hover-border-color); /* Updated hover border color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly increase shadow on hover */
 }
 
 .card-container {
