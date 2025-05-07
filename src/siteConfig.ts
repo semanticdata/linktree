@@ -21,33 +21,37 @@ export const cards: CardType[] = [
     icon: "fa-solid fa-home",
   },
   {
-    name: "Forgetful Notes",
+    name: "Digital Garden",
     link: "https://forgetfulnotes.com",
     icon: "fa-solid fa-seedling",
   },
   {
-    name: "PomoBar",
-    link: "https://github.com/semanticdata/obsidian-pomodoro",
-    icon: "fa-solid fa-stopwatch",
+    name: "Spotify",
+    link: "https://open.spotify.com/user/1216418539",
+    icon: "fa-brands fa-spotify",
   },
   {
-    name: "WhatsApp Pinned",
-    link: "https://addons.mozilla.org/en-US/firefox/addon/whatsapp-pinned/",
-    icon: "fa-brands fa-whatsapp",
-  },
-  {
-    name: "NoteKeeper",
-    link: "https://addons.mozilla.org/en-US/firefox/addon/notekeeper/",
-    icon: "fa-solid fa-note-sticky",
-  },
-  {
-    name: "Photography",
+    name: "Flickr",
     link: "https://www.flickr.com/photos/thewolfest/",
-    icon: "fa-solid fa-camera-retro",
+    icon: "fa-brands fa-flickr",
+  },
+  {
+    name: "Steam",
+    link: "https://steamcommunity.com/id/basedata",
+    icon: "fa-brands fa-steam",
+  },
+  {
+    name: "CodePen",
+    link: "https://codepen.io/semanticdata",
+    icon: "fa-brands fa-codepen",
   },
 ];
 
 export const links: LinkType[] = [
+  {
+    link: `mailto:${email}`,
+    icon: "fa-solid fa-envelope",
+  },
   {
     link: "https://www.linkedin.com/in/miguelpimentel29/",
     icon: "fa-brands fa-linkedin",
@@ -57,11 +61,7 @@ export const links: LinkType[] = [
     icon: "fa-brands fa-github",
   },
   {
-    link: "https://instagram.com/",
+    link: "https://www.instagram.com/miguelapv/",
     icon: "fa-brands fa-instagram",
-  },
-  {
-    link: `mailto:${email}`,
-    icon: "fa-solid fa-envelope",
   },
 ];
