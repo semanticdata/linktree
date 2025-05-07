@@ -3,7 +3,14 @@ import Card from "../components/Card.astro";
 import Link from "../components/Link.astro";
 import "../style.css";
 
-import { cards, links, name, subtitle, footer } from "../siteConfig";
+import {
+  cards,
+  links,
+  name,
+  subtitle,
+  footer,
+  description,
+} from "../siteConfig";
 ---
 
 <html lang="en">
@@ -18,8 +25,14 @@ import { cards, links, name, subtitle, footer } from "../siteConfig";
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="A collection of useful links" />
+    <meta name="description" content={description} />
     <meta name="author" content={name} />
     <title>{name} - Linktree</title>
   </head>

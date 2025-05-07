@@ -10,6 +10,7 @@ export interface LinkType {
 }
 
 export const name = "Miguel Pimentel";
+export const description = "A collection of useful links for Miguel Pimentel";
 export const email = "miguel.pimentel@email.com";
 export const subtitle = "A collection of useful links";
 export const footer = "Made with ❤️ in Minnesota";
