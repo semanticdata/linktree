@@ -2,8 +2,8 @@
 
 A simple linktree built with Astro.
 
-![screenshot](screenshots/screenshot.png)
-![screenshot-1](screenshots/screenshot-1.png)
+| ![screenshot](screenshots/screenshot.png) | ![screenshot-slim](screenshots/screenshot-slim.png) |
+| --- | --- |
 
 ## 🧞 Commands
 
