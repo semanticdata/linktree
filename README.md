@@ -2,6 +2,9 @@
 
 A simple linktree built with Astro.
 
+![screenshot](screenshots/screenshot.png)
+![screenshot-1](screenshots/screenshot-1.png)
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
