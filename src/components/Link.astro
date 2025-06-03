@@ -28,5 +28,6 @@ if (link.startsWith("mailto:")) {
   class="link-component"
   aria-label="Social Media Link"
   target={href.startsWith("mailto:") ? undefined : "_blank"}
+  rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
   href={href}><i class={icon} aria-hidden="true"></i></a
 >
