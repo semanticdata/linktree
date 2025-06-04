@@ -26,13 +26,6 @@ import {
     <meta name="description" content={description} />
     <meta name="author" content={name} />
     <title>{name} - Linktree</title>
-    <script>
-      import { library, dom } from "@fortawesome/fontawesome-svg-core";
-      import { fas } from "@fortawesome/free-solid-svg-icons";
-      import { fab } from "@fortawesome/free-brands-svg-icons";
-      library.add(fas, fab);
-      dom.watch();
-    </script>
   </head>
   <body class="body-custom">
     <main class="main-custom">
@@ -40,8 +33,8 @@ import {
       <p class="subtitle">{subtitle}</p>
       <div class="card-grid">
         {
-          cards.map(({ name: name, link, icon }) => {
-            return <Card {name} {link} {icon} />;
+          cards.map(({ name: cardName, link, icon }) => {
+            return <Card name={cardName} link={link} icon={icon} />;
           })
         }
       </div>
@@ -54,5 +47,12 @@ import {
       </div>
       <p class="footer-text">{footer}</p>
     </main>
+    <script>
+      import { library, dom } from "@fortawesome/fontawesome-svg-core";
+      import { fas } from "@fortawesome/free-solid-svg-icons";
+      import { fab } from "@fortawesome/free-brands-svg-icons";
+      library.add(fas, fab);
+      dom.watch();
+    </script>
   </body>
 </html>
