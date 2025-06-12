@@ -143,3 +143,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [Font Awesome](https://fontawesome.com/) - For the beautiful icons
 - [Font Source](https://github.com/fontsource/fontsource) - For the typeface packages
 - [Inter](https://rsms.me/inter/) - The typeface used in this project
+- [ESLint](https://eslint.org/) - For code quality
+- [Prettier](https://prettier.io/) - For code formatting
