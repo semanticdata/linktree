@@ -36,28 +36,18 @@ config.autoAddCss = false;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
-    Ruleset ignored due to bad selector.
-
     <!-- Preload Font Awesome to improve performance -->
+    <!-- Load Font Awesome CSS directly instead of using JavaScript imports -->
     <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-svg-core@latest/styles.css"
-      as="style"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
 
-    <!-- Load Font Awesome asynchronously -->
-    <script is:inline defer>
-      // Load Font Awesome icons asynchronously to avoid blocking rendering
-      window.addEventListener("DOMContentLoaded", async () => {
-        const { library, dom } = await import(
-          "@fortawesome/fontawesome-svg-core"
-        );
-        const { fas } = await import("@fortawesome/free-solid-svg-icons");
-        const { fab } = await import("@fortawesome/free-brands-svg-icons");
-        library.add(fas, fab);
-        dom.watch();
-      });
-    </script>
+    <!-- Preconnect to Font Awesome CDN to improve loading performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
     <!-- Critical CSS for above-the-fold content -->
     <style>
