@@ -41,7 +41,30 @@ import {
       type="font/woff2"
       crossorigin
     />
-    <!-- Fallback for browsers that don't support preload -->
+    <!-- Async Font Awesome loading script -->
+    <script>
+      // Load Font Awesome asynchronously after page load
+      function loadFontAwesome() {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href =
+          "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css";
+        link.integrity =
+          "sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==";
+        link.crossOrigin = "anonymous";
+        link.referrerPolicy = "no-referrer";
+        document.head.appendChild(link);
+      }
+
+      // Load after DOM is ready but don't block rendering
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", loadFontAwesome);
+      } else {
+        loadFontAwesome();
+      }
+    </script>
+
+    <!-- Fallback for browsers with JavaScript disabled -->
     <noscript>
       <link
         rel="stylesheet"
@@ -51,17 +74,6 @@ import {
         referrerpolicy="no-referrer"
       />
     </noscript>
-
-    <!-- Non-blocking Font Awesome CSS loading -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      media="print"
-      onload="this.media='all'"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
 
     <!-- Critical CSS for above-the-fold content -->
     <style>
