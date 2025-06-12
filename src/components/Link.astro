@@ -1,15 +1,7 @@
 ---
 /**
- * @typedef {Object} LinkProps
- * @property {string} link - The URL or email address to link to
- * @property {string} icon - Font Awesome icon class(es) for the link
- */
-
-/**
  * Determines if a string is an email address
  * @private
- * @param {string} str - The string to check
- * @returns {boolean} True if the string is an email address
  */
 function isEmail(str: string): boolean {
   return (
@@ -21,8 +13,6 @@ function isEmail(str: string): boolean {
  * Normalizes a URL by adding https:// if no protocol is specified
  * and handles mailto: links appropriately
  * @private
- * @param {string} url - The URL to normalize
- * @returns {string} The normalized URL
  */
 function normalizeUrl(url: string): string {
   if (url.startsWith("mailto:")) {
@@ -39,7 +29,6 @@ function normalizeUrl(url: string): string {
 
 /**
  * Link component that renders an icon link with proper accessibility attributes
- * @param {LinkProps} props - Component properties
  * @example
  * <Link link="https://github.com" icon="fa-brands fa-github" />
  * <Link link="mailto:example@example.com" icon="fa-regular fa-envelope" />
