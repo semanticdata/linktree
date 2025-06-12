@@ -1,33 +1,74 @@
 ---
-interface Props {
-  link: string;
-  icon: string;
-}
-const { link, icon } = Astro.props;
+/**
+ * @typedef {Object} LinkProps
+ * @property {string} link - The URL or email address to link to
+ * @property {string} icon - Font Awesome icon class(es) for the link
+ */
 
-// Helper to determine if the link is an email address
-function isEmail(str: string) {
+/**
+ * Determines if a string is an email address
+ * @private
+ * @param {string} str - The string to check
+ * @returns {boolean} True if the string is an email address
+ */
+function isEmail(str: string): boolean {
   return (
     str.includes("@") && !str.startsWith("http") && !str.startsWith("mailto:")
   );
 }
 
-let href = "";
-if (link.startsWith("mailto:")) {
-  href = link;
-} else if (isEmail(link)) {
-  href = `mailto:${link}`;
-} else if (link.startsWith("http://") || link.startsWith("https://")) {
-  href = link;
-} else {
-  href = `https://${link}`;
+/**
+ * Normalizes a URL by adding https:// if no protocol is specified
+ * and handles mailto: links appropriately
+ * @private
+ * @param {string} url - The URL to normalize
+ * @returns {string} The normalized URL
+ */
+function normalizeUrl(url: string): string {
+  if (url.startsWith("mailto:")) {
+    return url;
+  }
+  if (isEmail(url)) {
+    return `mailto:${url}`;
+  }
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `https://${url}`;
 }
+
+/**
+ * Link component that renders an icon link with proper accessibility attributes
+ * @param {LinkProps} props - Component properties
+ * @example
+ * <Link link="https://github.com" icon="fa-brands fa-github" />
+ * <Link link="mailto:example@example.com" icon="fa-regular fa-envelope" />
+ */
+interface Props {
+  /** The URL or email address to link to */
+  link: string;
+  /** Font Awesome icon class(es) */
+  icon: string;
+}
+
+const { link, icon } = Astro.props as Props;
+const href = normalizeUrl(link);
+const isExternalLink = !href.startsWith("mailto:");
 ---
 
+<!-- 
+  Interactive icon link that handles both external URLs and email links
+  @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
+-->
 <a
   class="link-component"
-  aria-label="Social Media Link"
-  target={href.startsWith("mailto:") ? undefined : "_blank"}
-  rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-  href={href}><i class={icon} aria-hidden="true"></i></a
+  aria-label={isExternalLink
+    ? `Open ${link} in a new tab`
+    : `Email ${link.replace("mailto:", "")}`}
+  target={isExternalLink ? "_blank" : undefined}
+  rel={isExternalLink ? "noopener noreferrer" : undefined}
+  href={href}
+  data-testid={isExternalLink ? "external-link" : "email-link"}
 >
+  <i class={icon} aria-hidden="true"></i>
+</a>
