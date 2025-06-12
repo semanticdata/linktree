@@ -32,56 +32,11 @@
   --link-icon-size-wide: 1.875rem;
 }
 
-/* Add font-display swap to ensure text is visible while fonts load */
+/* Simplified font loading with system fonts first */
 @font-face {
   font-family: "Inter Variable";
-  font-display: swap;
+  font-display: optional;
   src: local("Inter Variable");
-}
-
-/* Font loading states to prevent layout shifts */
-.fonts-loading body {
-  /* Ensure text is visible during font loading */
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-}
-
-.fonts-loaded body {
-  /* Apply the custom font once loaded */
-  font-family:
-    "Inter Variable",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-}
-
-/* Optimize title rendering during font loading */
-.fonts-loading .title {
-  /* Use a slightly smaller font size for the system font to match the visual size of Inter */
-  font-size: calc(var(--title-size) * 0.95);
-}
-
-.fonts-loaded .title {
-  /* Restore the original font size once Inter is loaded */
-  font-size: var(--title-size);
-}
-
-@media (min-width: 768px) {
-  .fonts-loading .title {
-    font-size: calc(var(--title-size-wide) * 0.95);
-  }
-
-  .fonts-loaded .title {
-    font-size: var(--title-size-wide);
-  }
 }
 
 body {
@@ -90,35 +45,24 @@ body {
   align-items: center;
   max-width: 100vw;
   min-height: 100vh;
-  /* Ensure gradient covers full height */
+  background-color: var(--background-color);
+  background-image: linear-gradient(
+    135deg,
+    var(--background-gradient-start) 0%,
+    var(--background-gradient-end) 100%
+  );
+  color: var(--text-color);
+  margin: 0;
   font-family:
-    "Inter Variable",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
+    "Inter Variable",
     sans-serif;
-  /* Use a simpler gradient that renders faster */
-  background-color: var(--background-gradient-start);
-  background-image: linear-gradient(
-    to bottom,
-    var(--background-gradient-start),
-    var(--background-gradient-end)
-  );
-  /* Set a background color for immediate rendering before gradient loads */
-  color: var(--text-color);
-  /* Optimize rendering */
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Updated text color */
-  margin: 0;
 }
 
 main {

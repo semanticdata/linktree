@@ -34,10 +34,36 @@ config.autoAddCss = false;
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    Ruleset ignored due to bad selector.
+
+    <!-- Preload Font Awesome to improve performance -->
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-svg-core@latest/styles.css"
+      as="style"
+    />
+
+    <!-- Load Font Awesome asynchronously -->
+    <script is:inline defer>
+      // Load Font Awesome icons asynchronously to avoid blocking rendering
+      window.addEventListener("DOMContentLoaded", async () => {
+        const { library, dom } = await import(
+          "@fortawesome/fontawesome-svg-core"
+        );
+        const { fas } = await import("@fortawesome/free-solid-svg-icons");
+        const { fab } = await import("@fortawesome/free-brands-svg-icons");
+        library.add(fas, fab);
+        dom.watch();
+      });
+    </script>
 
     <!-- Critical CSS for above-the-fold content -->
     <style>
       /* Inline critical styles to eliminate render-blocking CSS */
+      /* Use system fonts as fallback to prevent render delay */
+
       :root {
         --background-gradient-start: #ffffff;
         --background-gradient-end: #e9ecef;
@@ -52,7 +78,9 @@ config.autoAddCss = false;
         align-items: center;
         max-width: 100vw;
         min-height: 100vh;
-        background-color: var(--background-gradient-start);
+        background-color: var(
+          --background-gradient-start
+        ); /* Immediate color */
         color: var(--text-color);
         margin: 0;
         font-family:
@@ -61,7 +89,10 @@ config.autoAddCss = false;
           BlinkMacSystemFont,
           "Segoe UI",
           Roboto,
+          "Inter Variable",
           sans-serif;
+        text-rendering: optimizeSpeed; /* Optimize for speed over quality */
+        -webkit-font-smoothing: antialiased;
       }
 
       main {
@@ -80,6 +111,17 @@ config.autoAddCss = false;
         margin-block-end: 0;
         will-change: transform;
         transform: translateZ(0);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Inter Variable",
+          sans-serif;
+        content-visibility: auto;
+        contain: layout style paint;
+        contain-intrinsic-size: 1em;
       }
 
       @media (min-width: 768px) {
@@ -88,34 +130,6 @@ config.autoAddCss = false;
         }
       }
     </style>
-
-    <!-- Font loading optimization -->
-    <script>
-      // This script helps with font loading and reduces layout shifts
-      (function () {
-        // Add a class to indicate fonts are loading
-        document.documentElement.classList.add("fonts-loading");
-
-        // Check if fonts are already available
-        if ("fonts" in document) {
-          Promise.all([document.fonts.load('1em "Inter Variable"')])
-            .then(() => {
-              document.documentElement.classList.remove("fonts-loading");
-              document.documentElement.classList.add("fonts-loaded");
-            })
-            .catch(() => {
-              // If font loading fails, remove the loading class anyway
-              document.documentElement.classList.remove("fonts-loading");
-            });
-        } else {
-          // Fallback for browsers that don't support the Font Loading API
-          // Remove the loading class after a short timeout
-          setTimeout(() => {
-            document.documentElement.classList.remove("fonts-loading");
-          }, 300);
-        }
-      })();
-    </script>
   </head><body class="body-custom">
     <main class="main-custom">
       <h1 class="title">{name}</h1>
@@ -136,17 +150,6 @@ config.autoAddCss = false;
       </div>
       <p class="footer-text">{footer}</p>
     </main>
-    <script>
-      // Load Font Awesome icons asynchronously to avoid blocking rendering
-      document.addEventListener("DOMContentLoaded", async () => {
-        const { library, dom } = await import(
-          "@fortawesome/fontawesome-svg-core"
-        );
-        const { fas } = await import("@fortawesome/free-solid-svg-icons");
-        const { fab } = await import("@fortawesome/free-brands-svg-icons");
-        library.add(fas, fab);
-        dom.watch();
-      });
-    </script>
+    <!-- Font Awesome script moved to head with defer -->
   </body>
 </html>
