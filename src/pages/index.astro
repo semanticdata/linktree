@@ -3,7 +3,6 @@ import Card from "../components/Card.astro";
 import Link from "../components/Link.astro";
 
 import "../style.css";
-import "@fortawesome/fontawesome-svg-core/styles.css";
 
 // Import font CSS but don't use the import for loading (we'll preload it)
 import "@fontsource-variable/inter";
@@ -17,9 +16,7 @@ import {
   description,
 } from "../siteConfig";
 
-// Disable Font Awesome auto-adding CSS
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
+// We'll use Font Awesome via CDN for better compatibility with Astro
 ---
 
 <html lang="en">
@@ -36,8 +33,7 @@ config.autoAddCss = false;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
-    <!-- Preload Font Awesome to improve performance -->
-    <!-- Load Font Awesome CSS directly instead of using JavaScript imports -->
+    <!-- Font Awesome CSS from CDN for reliable icon display -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -45,9 +41,6 @@ config.autoAddCss = false;
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-
-    <!-- Preconnect to Font Awesome CDN to improve loading performance -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
     <!-- Critical CSS for above-the-fold content -->
     <style>
@@ -140,6 +133,5 @@ config.autoAddCss = false;
       </div>
       <p class="footer-text">{footer}</p>
     </main>
-    <!-- Font Awesome script moved to head with defer -->
   </body>
 </html>
