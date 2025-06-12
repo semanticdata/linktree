@@ -32,6 +32,58 @@
   --link-icon-size-wide: 1.875rem;
 }
 
+/* Add font-display swap to ensure text is visible while fonts load */
+@font-face {
+  font-family: "Inter Variable";
+  font-display: swap;
+  src: local("Inter Variable");
+}
+
+/* Font loading states to prevent layout shifts */
+.fonts-loading body {
+  /* Ensure text is visible during font loading */
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.fonts-loaded body {
+  /* Apply the custom font once loaded */
+  font-family:
+    "Inter Variable",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+/* Optimize title rendering during font loading */
+.fonts-loading .title {
+  /* Use a slightly smaller font size for the system font to match the visual size of Inter */
+  font-size: calc(var(--title-size) * 0.95);
+}
+
+.fonts-loaded .title {
+  /* Restore the original font size once Inter is loaded */
+  font-size: var(--title-size);
+}
+
+@media (min-width: 768px) {
+  .fonts-loading .title {
+    font-size: calc(var(--title-size-wide) * 0.95);
+  }
+
+  .fonts-loaded .title {
+    font-size: var(--title-size-wide);
+  }
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -52,15 +104,19 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-  /* background-color: var(--background-color); */
-  /* Replaced with gradient */
-  background: linear-gradient(
+  /* Use a simpler gradient that renders faster */
+  background-color: var(--background-gradient-start);
+  background-image: linear-gradient(
     to bottom,
     var(--background-gradient-start),
     var(--background-gradient-end)
   );
-  /* Updated gradient */
+  /* Set a background color for immediate rendering before gradient loads */
   color: var(--text-color);
+  /* Optimize rendering */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   /* Updated text color */
   margin: 0;
 }
@@ -80,11 +136,21 @@ main {
   font-weight: 900;
   text-align: center;
   margin-block-end: 0;
+  /* Optimize rendering of the title (LCP element) */
+  will-change: transform;
+  transform: translateZ(0);
+  /* Force hardware acceleration */
+  backface-visibility: hidden;
+  /* Prevent text from looking blurry during animations */
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .subtitle {
   font-size: var(--subtitle-size);
   text-align: center;
+  /* Optimize rendering */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .link-grid {
