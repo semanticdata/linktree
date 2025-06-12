@@ -4,7 +4,7 @@ import Link from "../components/Link.astro";
 
 import "../style.css";
 
-// Import font CSS but don't use the import for loading (we'll preload it)
+// Import font CSS but load it in a non-blocking way
 import "@fontsource-variable/inter";
 
 import {
@@ -15,8 +15,6 @@ import {
   footer,
   description,
 } from "../siteConfig";
-
-// We'll use Font Awesome via CDN for better compatibility with Astro
 ---
 
 <html lang="en">
@@ -29,14 +27,37 @@ import {
     <meta name="author" content={name} />
     <title>{name} - Linktree</title>
 
-    <!-- Preconnect to external domains -->
+    <!-- DNS prefetch and preconnect for performance -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
-    <!-- Font Awesome CSS from CDN for reliable icon display -->
+    <!-- Preload critical font for faster text rendering -->
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      />
+    </noscript>
+
+    <!-- Non-blocking Font Awesome CSS loading -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      media="print"
+      onload="this.media='all'"
       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
@@ -53,6 +74,13 @@ import {
         --text-color: #212529;
         --title-size: 2.25rem;
         --title-size-wide: 3.75rem;
+      }
+
+      /* Optimize font loading with font-display: swap */
+      @font-face {
+        font-family: "Inter Variable";
+        font-display: swap;
+        src: local("Inter Variable");
       }
 
       body {
