@@ -3,7 +3,7 @@
 A modern, responsive, and customizable Linktree clone built with [Astro](https://astro.build/). Perfect for creating a personal or professional link hub with a clean, minimal design.
 
 | ![screenshot](screenshots/screenshot.png) | ![screenshot-slim](screenshots/screenshot-slim.png) |
-| --- | --- |
+| ----------------------------------------- | --------------------------------------------------- |
 
 ## ✨ Features
 
@@ -63,7 +63,7 @@ export const cards = [
   {
     name: "My Portfolio",
     link: "https://your-portfolio.com",
-    icon: "fas fa-globe"
+    icon: "fas fa-globe",
   },
   // Add more cards as needed
 ];
@@ -71,7 +71,7 @@ export const cards = [
 export const links = [
   {
     link: "https://github.com/your-username",
-    icon: "fab fa-github"
+    icon: "fab fa-github",
   },
   // Add more social links as needed
 ];
